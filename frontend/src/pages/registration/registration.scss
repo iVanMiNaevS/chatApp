@@ -1,0 +1,59 @@
+@import "../../variables.scss";
+
+.reg {
+	&__wrapp {
+		display: flex;
+		width: 100%;
+		min-height: 100vh;
+		align-items: center;
+		justify-content: center;
+	}
+	&__box {
+		min-height: 400px;
+		// max-height: 621px;
+		height: fit-content;
+		display: flex;
+		width: 100%;
+		max-width: 860px;
+		box-shadow: $shadow;
+		border-radius: 10px;
+		img {
+			width: 40%;
+		}
+	}
+	&__form {
+		padding: 10% 5%;
+		width: 60%;
+		h2 {
+			text-align: center;
+			padding-bottom: 15%;
+		}
+		button {
+			width: 100%;
+			margin-top: 10%;
+		}
+	}
+	&__inputs-wrapp {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		margin-bottom: 5%;
+		color: $black;
+		i {
+			position: absolute;
+			right: 10px;
+			top: 55%;
+			transform: translateY(-100%);
+			font-size: $large-text;
+			transition: 0.3s transform;
+			&:hover {
+				transform: translateY(-100%) scale(1.1);
+			}
+		}
+	}
+	&__have-acc {
+		margin-top: 3%;
+		font-size: $medium-text;
+	}
+}

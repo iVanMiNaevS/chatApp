@@ -1,0 +1,14 @@
+@import "../../variables.scss";
+.ui-button {
+	background: $pink;
+	padding: 10px 30px;
+	font-size: $medium-text;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	transition: 0.3s all;
+	&:hover {
+		cursor: pointer;
+		background: $pink-light;
+	}
+}

@@ -1,0 +1,23 @@
+@import "../../variables.scss";
+
+.ui-input {
+	border-radius: 10px;
+	border: 2px solid $pink;
+	outline: none;
+	padding: 10px;
+	color: $black;
+	width: 100%;
+	font-size: calc($medium-text - 3px);
+	transition: 0.3s background;
+	&:focus {
+		background: $pink-light;
+		color: white;
+		border: 2px solid $pink-light;
+		&::placeholder {
+			color: white;
+		}
+	}
+	&:focus + i {
+		color: white;
+	}
+}
