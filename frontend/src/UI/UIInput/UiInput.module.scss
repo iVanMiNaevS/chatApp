@@ -9,6 +9,9 @@
 	width: 100%;
 	font-size: calc($medium-text - 3px);
 	transition: 0.3s background;
+	&__errorMess {
+		color: $red;
+	}
 	&:focus {
 		background: $pink-light;
 		color: white;
@@ -19,5 +22,11 @@
 	}
 	&:focus + i {
 		color: white;
+	}
+}
+
+@media (max-width: 400px) {
+	.ui-input {
+		@include set-font-size($medium-text);
 	}
 }

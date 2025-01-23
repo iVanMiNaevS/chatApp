@@ -1,34 +1,94 @@
 import React, {useState} from "react";
 import "./login.scss";
 import UiButton from "../../UI/UIButton/UiButton";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import UiInput from "../../UI/UIInput/UiInput";
 import {useDispatch} from "react-redux";
-import {login} from "../../store/slices/AuthSlice";
+// import {login} from "../../store/slices/AuthSlice";
+import {useAppSelector} from "../../hooks/redux";
+import {useLoginMutation, useRegisterMutation} from "../../store/services/auth";
+import UIAlert from "../../UI/UIAlert/UiAlert";
+import {pickAlertMess} from "../../utils/alert";
+import {FieldRules, FormErrors, validateForm} from "../../utils/validationForm";
+import {FetchBaseQueryError} from "../../types/fetchTypes";
+import {useFetchAuthFunc} from "../../hooks/useFetchAuth";
+
+type fieldsForm = {
+	password: string;
+	email: string;
+};
 
 export const Login = () => {
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
 	const [vision, setVision] = useState(false);
-	const [validErr, setValidErr] = useState({pass: "", email: ""});
+	const [validErr, setValidErr] = useState<FormErrors<fieldsForm>>({password: "", email: ""});
 
-	const dispath = useDispatch();
+	const user = useAppSelector((store) => store.auth.user);
+	// const [fetchRegister] = useRegisterMutation();
+
+	const rulesForm: FieldRules = {
+		email: [
+			{type: "required", message: "Email is required"},
+			{type: "email", message: "Invalid email format"},
+		],
+		password: [
+			{type: "required", message: "Password is required"},
+			{type: "minLength", value: 8, message: "Password must be at least 8 characters"},
+		],
+	};
+
+	const [error, setError] = useState<FetchBaseQueryError>();
+	const [alertVis, setAlertVis] = useState(false);
+	const loginFetch = useFetchAuthFunc("login");
+	const navigate = useNavigate();
+
+	function closeAlert() {
+		setAlertVis(false);
+	}
 
 	return (
 		<div className="container">
+			{alertVis && (
+				<UIAlert
+					onClose={closeAlert}
+					type="error"
+					message={`Unexpected Error:', ${error?.status}`}
+					duration={8000}
+				/>
+			)}
+			{alertVis && error && typeof error?.status == "number" && (
+				<UIAlert
+					duration={8000}
+					onClose={closeAlert}
+					type="error"
+					message={`HTTP Error:', ${error?.status},  ${pickAlertMess(error.data)}`}
+				/>
+			)}
 			<div className="login__wrapp">
 				<div className="login__box">
 					<img src={require("../../imgs/bglogin.jpg")} alt="bg" />
 					<form
 						className="login__form"
-						onSubmit={(e) => {
+						onSubmit={async (e) => {
 							e.preventDefault();
-							dispath(login());
+							const errors = validateForm({email, password}, rulesForm);
+							if (Object.keys(errors).length !== 0) {
+								setValidErr(errors);
+								return;
+							} else {
+								setValidErr({
+									password: "",
+									email: "",
+								});
+							}
+							await loginFetch({password, email}, navigate, "/", setError, setAlertVis);
 						}}
 					>
 						<h2>Welcome✌️</h2>
 						<div className="login__inputs-wrapp">
 							<UiInput
+								errorMessage={validErr.email}
 								classNameInput=""
 								type="email"
 								id="login-email"
@@ -44,7 +104,7 @@ export const Login = () => {
 						</div>
 						<div className="login__inputs-wrapp">
 							<UiInput
-								errorMessage={validErr.pass}
+								errorMessage={validErr.password}
 								type={!vision ? "password" : "text"}
 								id="login-password"
 								onChange={(value) => {
@@ -60,7 +120,7 @@ export const Login = () => {
 									)
 								}
 							/>
-							<label style={{display: `${validErr.pass && "none"}`}} htmlFor="login-password">
+							<label style={{display: `${validErr.password && "none"}`}} htmlFor="login-password">
 								Password
 							</label>
 						</div>

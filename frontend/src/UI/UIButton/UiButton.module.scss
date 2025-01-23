@@ -12,3 +12,8 @@
 		background: $pink-light;
 	}
 }
+@media (max-width: 400px) {
+	.ui-button {
+		@include set-font-size($medium-text, 2px);
+	}
+}

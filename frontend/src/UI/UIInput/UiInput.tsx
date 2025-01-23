@@ -52,7 +52,7 @@ const UiInput: React.FC<InputProps> = ({
 				</label>
 			)}
 			{icon && icon}
-			{errorMessage && <span className="mt-1 text-sm text-red-500">{errorMessage}</span>}
+			{errorMessage && <span className={styles["ui-input__errorMess"]}>{errorMessage}</span>}
 		</div>
 	);
 };

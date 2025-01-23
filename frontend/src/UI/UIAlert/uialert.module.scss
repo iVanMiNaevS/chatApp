@@ -1,0 +1,83 @@
+@import "../../variables.scss";
+.notification {
+	position: absolute;
+	top: 3%;
+	right: 3%;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 25px;
+	margin: 8px 0;
+	max-width: 60vw;
+	border-radius: 4px;
+	font-size: $medium-text;
+	animation: fadeIn 0.3s ease-out;
+	color: #fff;
+
+	p {
+		margin: 0;
+		flex: 1;
+	}
+
+	&-close {
+		background: transparent;
+		border: none;
+		color: inherit;
+		font-size: 18px;
+		cursor: pointer;
+		position: absolute;
+		right: 4px;
+		top: 4px;
+	}
+
+	// Типы уведомлений
+	&-info {
+		background-color: #007bff;
+	}
+
+	&-success {
+		background-color: #28a745;
+	}
+
+	&-warning {
+		background-color: #ffc107;
+		color: #000; // Для лучшей читаемости текста
+	}
+
+	&-error {
+		background-color: $red;
+	}
+}
+
+// Анимации
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+// @keyframes fadeOut {
+// 	from {
+// 		opacity: 1;
+// 		transform: translateY(0);
+// 	}
+// 	to {
+// 		opacity: 0;
+// 		transform: translateY(-10px);
+// 	}
+// }
+
+@media (max-width: 400px) {
+	.notification {
+		@include set-font-size($medium-text, 4px);
+		max-width: 100vw;
+		width: 100%;
+		right: 0;
+	}
+}

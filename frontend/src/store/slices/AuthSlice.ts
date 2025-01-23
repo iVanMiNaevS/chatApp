@@ -1,6 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {IUserInToken} from "../../interfaces/IAuth";
+import {IUserInToken} from "../../types/IAuth";
 import type {PayloadAction} from "@reduxjs/toolkit";
+import {authApi} from "../services/auth";
 
 type initialState = {
 	user: IUserInToken;
@@ -20,13 +21,18 @@ const initialState: initialState = {
 const authSlice = createSlice({
 	name: "auth",
 	initialState,
-	reducers: {
-		login: (state) => {
-			console.log("login");
-		},
+	reducers: {},
+	extraReducers: (builder) => {
+		builder.addMatcher(authApi.endpoints.register.matchFulfilled, (state, payload) => {
+			console.log(payload);
+		});
+		builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, {payload}) => {
+			localStorage.setItem("token", JSON.stringify(payload));
+			console.log(payload);
+		});
 	},
 });
 
-export const {login} = authSlice.actions;
+// export const {login, registration} = authSlice.actions;
 
 export const authReducer = authSlice.reducer;
