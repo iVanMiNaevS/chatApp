@@ -27,7 +27,7 @@ export const authApi = createApi({
 				body,
 			}),
 		}),
-		login: builder.mutation<IUserInToken, string>({
+		login: builder.mutation<{access: string; refresh: string}, string>({
 			query: (body) => ({
 				url: "/token/",
 				method: "POST",

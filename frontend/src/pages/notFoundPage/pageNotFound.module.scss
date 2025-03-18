@@ -1,0 +1,21 @@
+@import "../../variables.scss";
+.main {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.block {
+	text-align: center;
+	h2 {
+		font-size: 10rem;
+		color: $pink;
+	}
+	p {
+		font-size: 1.5rem;
+		color: $black;
+		margin-bottom: 1rem;
+	}
+}

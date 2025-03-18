@@ -1,0 +1,20 @@
+@import "../../variables.scss";
+.message {
+	background: $pink;
+	color: white;
+	border-radius: 2rem;
+	font-size: 1.5rem;
+	padding: 1rem;
+	width: fit-content;
+	.text {
+		margin-right: 0.5rem;
+	}
+	.time {
+		font-size: 0.9rem;
+	}
+}
+.message.personal {
+	background: white;
+	color: $pink;
+	margin-left: auto;
+}

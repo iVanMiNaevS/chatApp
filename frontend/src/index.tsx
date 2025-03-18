@@ -6,9 +6,10 @@ import {Login} from "./pages/login/Login";
 import {Register} from "./pages/registration/Register";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {PrivateRoute} from "./components/PrivateRoute";
-import {Home} from "./pages/Home";
+import {Home} from "./pages/home/Home";
 import {store} from "./store/store";
 import {Provider} from "react-redux";
+import NotFoundPage from "./pages/notFoundPage/NotFoundPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
@@ -26,6 +27,7 @@ root.render(
 					></Route>
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
+					<Route path="*" element={<NotFoundPage />} />
 				</Routes>
 			</Provider>
 		</BrowserRouter>

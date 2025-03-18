@@ -10,7 +10,8 @@
 	}
 	&__box {
 		min-height: 400px;
-		// max-height: 621px;
+		opacity: 0;
+		animation: ani 1s forwards;
 		height: fit-content;
 		display: flex;
 		width: 100%;
@@ -21,6 +22,7 @@
 			width: 40%;
 		}
 	}
+
 	&__form {
 		padding: 10% 5%;
 		width: 60%;
@@ -55,6 +57,17 @@
 	&__have-acc {
 		margin-top: 3%;
 		font-size: $medium-text;
+	}
+}
+
+@keyframes ani {
+	0% {
+		transform: scale(0.9);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
 	}
 }
 

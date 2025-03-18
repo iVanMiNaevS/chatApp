@@ -12,6 +12,8 @@
 		min-height: 400px;
 		// max-height: 621px;
 		height: fit-content;
+		opacity: 0;
+		animation: ani 1s forwards;
 		display: flex;
 		width: 100%;
 		max-width: 860px;
@@ -83,6 +85,17 @@
 		&__inputs-wrapp {
 			margin-bottom: 5%;
 		}
+	}
+}
+
+@keyframes ani {
+	0% {
+		transform: scale(0.9);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
 	}
 }
 
