@@ -1,6 +1,13 @@
-import React, {FC} from "react";
+import React, { FC } from "react";
 import styles from "./message.module.scss";
-export const Message: FC<{type: "personal" | "sender"}> = ({type}) => {
+
+export type typeMessage = {
+	type: "personal" | "sender";
+	message: string;
+	time: string;
+};
+
+export const Message: FC<typeMessage> = ({ type, message, time }) => {
 	return (
 		<div
 			className={
@@ -9,8 +16,8 @@ export const Message: FC<{type: "personal" | "sender"}> = ({type}) => {
 					: `${styles.message + " " + styles.sender}`
 			}
 		>
-			<span className={styles.text}>hi bro</span>
-			<span className={styles.time}>12:57</span>
+			<span className={styles.text}>{message}</span>
+			<span className={styles.time}>{time}</span>
 		</div>
 	);
 };

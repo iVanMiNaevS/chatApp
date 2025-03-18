@@ -1,0 +1,48 @@
+@import "../../variables.scss";
+.chat {
+	transition: 0.2s;
+	&:hover {
+		background: $pink-very-light;
+	}
+	cursor: pointer;
+	width: 100%;
+	padding: 1.5rem;
+	display: flex;
+	img {
+		object-fit: contain;
+		border-radius: 100%;
+		width: 3rem;
+		height: 3rem;
+		margin-right: 1rem;
+	}
+	&__info {
+		justify-content: space-between;
+		display: flex;
+		flex-direction: column;
+		width: 50%;
+	}
+	&__user__name {
+		font-size: 1.5rem;
+	}
+	&__last__message {
+		color: $black;
+		overflow-x: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	&__time {
+		margin-left: auto;
+		color: $pink;
+		display: flex;
+		align-items: center;
+		font-size: 1.5rem;
+	}
+}
+.chat.active {
+	background: $pink;
+	.chat__time,
+	.chat__info,
+	.chat__last__message {
+		color: white;
+	}
+}
