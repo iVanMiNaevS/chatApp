@@ -24,6 +24,8 @@ class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
 
+
+
 # Get All Routes
 
 @api_view(['GET'])

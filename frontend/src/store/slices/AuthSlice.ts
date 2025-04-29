@@ -10,17 +10,34 @@ type initialState = {
 	token: string;
 	refresh: string;
 };
-
-const initialState: initialState = {
-	baseURL: "http://127.0.0.1:8000/api",
-	user: {
+let initialStateUser: IUserInToken = {
+	full_name: "",
+	username: "",
+	email: "",
+	bio: "",
+	image: "",
+	verified: false,
+	user_id: null,
+};
+if (localStorage.getItem("token") !== null) {
+	const decode: ITokenData = jwtDecode(JSON.parse(localStorage.getItem("token")!).access);
+	const {username, bio, image, verified, email, full_name, user_id} = decode;
+	initialStateUser = {username, bio, image, full_name, verified, email, user_id};
+} else {
+	initialStateUser = {
 		full_name: "",
 		username: "",
 		email: "",
 		bio: "",
 		image: "",
 		verified: false,
-	},
+		user_id: null,
+	};
+}
+
+const initialState: initialState = {
+	baseURL: "http://127.0.0.1:8000/api",
+	user: initialStateUser,
 	token:
 		localStorage.getItem("token") !== null ? JSON.parse(localStorage.getItem("token")!).access : "",
 	refresh:
@@ -48,8 +65,8 @@ const authSlice = createSlice({
 		builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, {payload}) => {
 			localStorage.setItem("token", JSON.stringify(payload));
 			const decode: ITokenData = jwtDecode(payload.access);
-			const {username, bio, image, verified, email, full_name} = decode;
-			state.user = {username, bio, image, full_name, verified, email};
+			const {username, bio, image, verified, email, full_name, user_id} = decode;
+			state.user = {username, bio, image, full_name, verified, email, user_id};
 			state.token = payload.access;
 			state.refresh = payload.refresh;
 		});

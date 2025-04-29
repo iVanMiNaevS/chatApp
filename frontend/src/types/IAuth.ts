@@ -5,6 +5,7 @@ export interface IUserInToken {
 	bio: string;
 	image: string;
 	verified: boolean;
+	user_id: number | null;
 }
 
 export interface ITokenData {

@@ -1,0 +1,25 @@
+@import "../../variables.scss";
+.profile-wrapp__container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	min-height: 80vh;
+	gap: 2rem;
+	.avatar {
+		width: 25rem;
+		height: 25rem;
+		border-radius: 100%;
+		border: 2px solid $pink;
+	}
+	.profile__info {
+		text-align: center;
+	}
+	h2 {
+		margin-bottom: 0.5rem;
+		font-size: 3rem;
+	}
+	p {
+		font-size: 1.3rem;
+	}
+}

@@ -13,6 +13,7 @@ type InputProps = {
 	className?: string; // Дополнительные классы стилей
 	classNameInput?: string;
 	errorMessage?: string; // Сообщение об ошибке
+	onFocusHandle?: () => void;
 };
 
 const UiInput: React.FC<InputProps> = ({
@@ -28,10 +29,14 @@ const UiInput: React.FC<InputProps> = ({
 	errorMessage,
 	icon,
 	classNameInput = "",
+	onFocusHandle,
 }) => {
 	return (
 		<div className={`${className}`}>
 			<input
+				onFocus={(e) => {
+					if (onFocusHandle) onFocusHandle();
+				}}
 				id={id}
 				type={type}
 				value={value}

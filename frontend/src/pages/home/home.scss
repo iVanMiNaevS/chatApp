@@ -19,11 +19,42 @@
 		}
 		input {
 			transition: 0.3s;
+			width: 100%;
 		}
 		input:focus {
 			background: white;
 			color: $pink;
 			border-radius: 2rem;
+		}
+		&__icon-row,
+		&__icon-profile {
+			background: white;
+			color: $pink;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 10px;
+			border-radius: 100%;
+			font-size: 23px;
+			aspect-ratio: 1/1;
+			height: 44px;
+			transition: 0.3s;
+		}
+		&__icon-profile a {
+			transition: 0.3s;
+			height: 23px;
+		}
+		&__icon-profile:hover a {
+			color: white;
+		}
+		&__icon-row:hover,
+		&__icon-profile:hover {
+			cursor: pointer;
+			color: white;
+			background: $pink;
+		}
+		&__input-wrapp {
+			width: 100%;
 		}
 	}
 	.chats {
@@ -44,6 +75,12 @@
 		&::-webkit-scrollbar-thumb {
 			background: rgba(100, 100, 100, 0.5); /* Цвет ползунка */
 			border-radius: 4px;
+		}
+		&__text {
+			text-align: center;
+			margin-top: 10px;
+			color: $pink;
+			font-size: 25px;
 		}
 		.chat {
 			transition: 0.2s;
@@ -126,6 +163,14 @@
 			gap: 2rem;
 			i {
 				cursor: pointer;
+				transition: 0.3s;
+				padding: 10px;
+			}
+			i:hover {
+				border-radius: 100%;
+				padding: 10px;
+				background: $pink;
+				color: white;
 			}
 		}
 	}
